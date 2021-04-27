@@ -2,7 +2,6 @@
 #define CACHE_H
 
 #include "main.h"
-/* 24/04/2021 */
 
 enum BFactor { LH = -1, EH = 0, RH = 1 };
 
@@ -119,7 +118,7 @@ private:
     }
   }
 
-  bool remove(ElemNode *&node, Elem *&e) {
+  bool remove(ElemNode *&node, Elem *e) {
     if (!node) {
       size++;
       return false;
@@ -145,7 +144,7 @@ private:
         temp = temp->left;
       node->e = temp->e;
       temp->e = e;
-      if (remove(node->right, temp->e))
+      if (remove(node->right, e))
         return balanceLeft(node);
       else
         return false;
@@ -248,6 +247,8 @@ class Cache {
 public:
   Cache(int s) {
     arr = new Elem *[s];
+    for (int i = 0; i < s; i++)
+      arr[i] = NULL;
     p = 0;
     maxSize = s;
   }
